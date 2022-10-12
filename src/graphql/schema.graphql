@@ -28,12 +28,6 @@ type Book implements BaseModel {
   category: Category
 }
 
-enum Category {
-  ADVENTURE
-  HORROR
-  SCIENCE_FICTION
-  ROMANCE
-}
 
 type Author implements BaseModel {
   id: ID!
@@ -43,9 +37,16 @@ type Author implements BaseModel {
 
   name: String
   surname: String
+  birthDate: DateTime
   books: [Book]
 }
 
+enum Category {
+  ADVENTURE
+  HORROR
+  SCIENCE_FICTION
+  ROMANCE
+}
 input BookInput {
   title: String!
   description: String!
