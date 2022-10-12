@@ -1,14 +1,32 @@
 import { ApolloServer } from "apollo-server";
 
 const typeDefs = `
+    type Book {
+        title: String
+        description: String
+        year: Int
+        category: Category
+    }
+    enum Category {
+        ADVENTURE
+        HORROR
+        SCIENCE_FICTION
+        ROMANCE
+    }
+    type Author {
+        name: String
+        surname: String
+        books: [Book]
+    }
     type Query {
-        info: String!
+        getBooks: [Book]!
+        getAuthors: [Author]!
     }
 `;
 
 const resolvers = {
   Query: {
-    info: () => `This is the API test`,
+    getBooks: () => `This is the API test`,
   },
 };
 
