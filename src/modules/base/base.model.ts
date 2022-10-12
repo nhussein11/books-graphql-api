@@ -1,6 +1,6 @@
 export type BaseModel = {
     id: string;
     createdAt: Date;
-    updatedAt: Date;
-    deletedAt: Date;
+    updatedAt: Date | undefined;
+    deletedAt: Date | undefined;
 };

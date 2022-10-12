@@ -1,6 +1,6 @@
 import { BaseModel } from "../base/base.model";
 
-export type BookModel = BaseModel & {
+export type Book = BaseModel & {
   title: string;
   description: string;
   year: number;
