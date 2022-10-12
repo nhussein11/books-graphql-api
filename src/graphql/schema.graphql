@@ -1,0 +1,58 @@
+scalar DateTime
+
+type Query {
+  getBooks: [Book]!
+  getAuthors: [Author]!
+}
+type Mutation {
+  createBook(book: BookInput!): Book!
+  createAuthor(author: AuthorInput!): Author!
+}
+
+interface BaseModel {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime
+  deletedAt: DateTime
+}
+
+type Book implements BaseModel {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime
+  deletedAt: DateTime
+
+  title: String
+  description: String
+  year: Int
+  category: Category
+}
+
+enum Category {
+  ADVENTURE
+  HORROR
+  SCIENCE_FICTION
+  ROMANCE
+}
+
+type Author implements BaseModel {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime
+  deletedAt: DateTime
+
+  name: String
+  surname: String
+  books: [Book]
+}
+
+input BookInput {
+  title: String!
+  description: String!
+  year: Int!
+  category: Category!
+}
+input AuthorInput {
+  name: String!
+  surname: String!
+}
