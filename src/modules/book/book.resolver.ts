@@ -48,9 +48,27 @@ const books: Book[] = [
 ];
 
 const getBooks = (): Book[] => {
-    return books;
+  return books;
+};
+const getBook = (id: string): Book | null => {
+  return books.find((author) => author.id === id) || null;
 };
 
+export const resolver: Record<
+  keyof (Book),
+  (parent: Book) => unknown
+> = {
+  id: (parent) => parent.id,
+  createdAt: (parent) => parent.createdAt,
+  deletedAt: (parent) => parent.deletedAt,
+  updatedAt: (parent) => parent.updatedAt,
+  title: (parent) => parent.title,
+  description: (parent) => parent.description,
+  year: (parent) => parent.year,
+  category: (parent) => parent.category,
+}
+
 exports = {
-    getBooks,
+  getBooks,
+  getBook,
 };

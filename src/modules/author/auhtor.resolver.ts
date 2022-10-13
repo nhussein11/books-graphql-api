@@ -34,6 +34,11 @@ const getAuthors = (): Author[] => {
   return authors;
 };
 
+const getAuthor = (id: string): Author | null => {
+  return authors.find((author) => author.id === id) || null;
+};
+
 exports = {
   getAuthors,
+  getAuthor,
 };

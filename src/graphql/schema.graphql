@@ -2,7 +2,9 @@ scalar DateTime
 
 type Query {
   getBooks: [Book]!
+  getBook(id: ID!): Book
   getAuthors: [Author]!
+  getAuthor(id: ID!): Author
 }
 type Mutation {
   createBook(book: BookInput!): Book!
@@ -47,13 +49,16 @@ enum Category {
   SCIENCE_FICTION
   ROMANCE
 }
+
 input BookInput {
   title: String!
   description: String!
   year: Int!
   category: Category!
 }
+
 input AuthorInput {
   name: String!
   surname: String!
+  birthDate: DateTime!
 }
