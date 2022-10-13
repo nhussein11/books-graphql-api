@@ -54,10 +54,7 @@ const getBook = (id: string): Book | null => {
   return books.find((author) => author.id === id) || null;
 };
 
-export const resolver: Record<
-  keyof (Book),
-  (parent: Book) => unknown
-> = {
+export const resolver: Record<keyof Book, (parent: Book) => unknown> = {
   id: (parent) => parent.id,
   createdAt: (parent) => parent.createdAt,
   deletedAt: (parent) => parent.deletedAt,
@@ -66,9 +63,6 @@ export const resolver: Record<
   description: (parent) => parent.description,
   year: (parent) => parent.year,
   category: (parent) => parent.category,
-}
-
-exports = {
-  getBooks,
-  getBook,
 };
+
+export { getBooks, getBook };

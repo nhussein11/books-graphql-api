@@ -38,7 +38,7 @@ const getAuthor = (id: string): Author | null => {
   return authors.find((author) => author.id === id) || null;
 };
 
-exports = {
+export {
   getAuthors,
   getAuthor,
 };

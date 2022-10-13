@@ -1,4 +1,4 @@
-scalar DateTime
+scalar Datetime
 
 type Query {
   getBooks: [Book]!
@@ -13,16 +13,16 @@ type Mutation {
 
 interface BaseModel {
   id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime
-  deletedAt: DateTime
+  createdAt: Datetime!
+  updatedAt: Datetime
+  deletedAt: Datetime
 }
 
 type Book implements BaseModel {
   id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime
-  deletedAt: DateTime
+  createdAt: Datetime!
+  updatedAt: Datetime
+  deletedAt: Datetime
 
   title: String
   description: String
@@ -33,13 +33,13 @@ type Book implements BaseModel {
 
 type Author implements BaseModel {
   id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime
-  deletedAt: DateTime
+  createdAt: Datetime!
+  updatedAt: Datetime
+  deletedAt: Datetime
 
   name: String
   surname: String
-  birthDate: DateTime
+  birthDate: Datetime
   books: [Book]
 }
 
@@ -60,5 +60,5 @@ input BookInput {
 input AuthorInput {
   name: String!
   surname: String!
-  birthDate: DateTime!
+  birthDate: Datetime!
 }
