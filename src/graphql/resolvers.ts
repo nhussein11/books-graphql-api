@@ -1,10 +1,6 @@
 import { Datetime } from "../modules/base/scalar.model";
-import {
-  createBook,
-  getBook,
-  getBooks,
-} from "../modules/book/book.resolver";
-import { getAuthor, getAuthors } from "../modules/author/auhtor.resolver";
+import { createBook, getBook, getBooks } from "../modules/book/book.resolver";
+import { createAuthor, getAuthor, getAuthors } from "../modules/author/auhtor.resolver";
 import { ResolverContext } from "../@types/ResolverContext";
 
 const Query = {
@@ -12,14 +8,17 @@ const Query = {
     getBooks(parent, args, context),
   getBook: (parent: any, args: unknown, context: ResolverContext) =>
     getBook(parent, args, context),
-  getAuthors: () => getAuthors(),
-  getAuthor: (parent: any, args: { id: string }) => getAuthor(args.id),
+  getAuthors: (parent: unknown, args: unknown, context: ResolverContext) =>
+    getAuthors(parent, args, context),
+  getAuthor: (parent: unknown, args: unknown, context: ResolverContext) =>
+    getAuthor(parent, args, context),
 };
 
 const Mutation = {
   createBook: (parent: unknown, args: unknown, context: ResolverContext) =>
     createBook(parent, args, context),
-  createAuthor: ({}) => "New author created",
+  createAuthor: (parent: unknown, args: unknown, context: ResolverContext) =>
+    createAuthor(parent, args, context),
 };
 
 export { Datetime, Query, Mutation };
