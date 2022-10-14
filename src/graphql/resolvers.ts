@@ -3,9 +3,9 @@ import {
   createBook,
   getBook,
   getBooks,
-  ResolverContext,
 } from "../modules/book/book.resolver";
 import { getAuthor, getAuthors } from "../modules/author/auhtor.resolver";
+import { ResolverContext } from "../@types/ResolverContext";
 
 const Query = {
   getBooks: (parent: unknown, args: unknown, context: ResolverContext) =>

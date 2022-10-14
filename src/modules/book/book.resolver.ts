@@ -1,9 +1,5 @@
-// import { Book, CategoryEnum } from "./book.model";
-import { Book, CategoryEnum, PrismaClient } from "@prisma/client";
-
-export type ResolverContext = {
-  orm: PrismaClient;
-};
+import { Book } from "@prisma/client";
+import { ResolverContext } from "../../@types/ResolverContext";
 
 // const books: Book[] = [
 //   {
