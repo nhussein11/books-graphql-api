@@ -3,8 +3,9 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
 model Author {
@@ -13,12 +14,32 @@ model Author {
   surname String
   birth   DateTime
 
+  createdAt DateTime
+  updatedAt DateTime
+  deletedAt DateTime
+
   Books Book[]
 }
 
 model Book {
-  id       String @id @default(cuid())
-  title    String
+  id          String       @id @default(cuid())
+  title       String
+  description String
+  year        Int
+  category    CategoryEnum
+
+  createdAt DateTime
+  updatedAt DateTime
+  deletedAt DateTime
+
   author   Author @relation(fields: [authorId], references: [id])
   authorId String @map("author_id")
+}
+
+enum CategoryEnum {
+  ADVENTURE
+  HORROR
+  SCIENCE_FICTION
+  ROMANCE
+  FANTASY
 }
