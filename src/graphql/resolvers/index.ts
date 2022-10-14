@@ -1,7 +1,7 @@
-import { Datetime } from "../modules/base/scalar.model";
-import { createBook, getBook, getBooks } from "../modules/controllers/book/book.controller";
-import { createAuthor, getAuthor, getAuthors } from "../modules/controllers/author/author.controller";
-import { ResolverContext } from "../@types/ResolverContext";
+import { Datetime } from "../../modules/base/scalar.model";
+import { createBook, getBook, getBooks } from "../../modules/controllers/book/book.controller";
+import { createAuthor, getAuthor, getAuthors } from "../../modules/controllers/author/author.controller";
+import { ResolverContext } from "../../@types/ResolverContext";
 
 const Query = {
   getBooks: (parent: unknown, args: unknown, context: ResolverContext) =>
