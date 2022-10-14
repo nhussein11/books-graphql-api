@@ -1,6 +1,6 @@
 import { Datetime } from "../modules/base/scalar.model";
-import { createBook, getBook, getBooks } from "../modules/book/book.resolver";
-import { createAuthor, getAuthor, getAuthors } from "../modules/author/auhtor.resolver";
+import { createBook, getBook, getBooks } from "../modules/controllers/book/book.controller";
+import { createAuthor, getAuthor, getAuthors } from "../modules/controllers/author/author.controller";
 import { ResolverContext } from "../@types/ResolverContext";
 
 const Query = {

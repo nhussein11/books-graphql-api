@@ -1,5 +1,5 @@
 import { Author } from "@prisma/client";
-import { ResolverContext } from "../../@types/ResolverContext";
+import { ResolverContext } from "../../../@types/ResolverContext";
 
 const getAuthors = (
   parent: unknown,
@@ -26,19 +26,25 @@ const getAuthor = (
 
 const createAuthor = (
   parent: unknown,
-  arg: unknown,
+  args: unknown,
   context: ResolverContext
-) : Promise<Author>=> {
-  const { name, surname, birth } = arg as Author;
-  const author = context.orm.author.create({
-    data: {
-      name,
-      surname,
-      birth,
-    },
-  });
+): Promise<Author> => {
+  try {
+    const { author: authorInput } = args as { author: Author };
+    console.log(authorInput);
+    const { name, surname, birth } = authorInput as Author;
+    const author = context.orm.author.create({
+      data: {
+        name,
+        surname,
+        birth: new Date(birth),
+      },
+    });
 
-  return author;
+    return author;
+  } catch (error: any) {
+    throw new Error(error);
+  }
 };
 
 export { getAuthors, getAuthor, createAuthor };

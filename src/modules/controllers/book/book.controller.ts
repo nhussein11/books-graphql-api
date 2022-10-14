@@ -1,5 +1,5 @@
 import { Book } from "@prisma/client";
-import { ResolverContext } from "../../@types/ResolverContext";
+import { ResolverContext } from "../../../@types/ResolverContext";
 
 // const books: Book[] = [
 //   {
