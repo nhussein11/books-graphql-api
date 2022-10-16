@@ -6,8 +6,10 @@ import {
 } from '../../modules/controllers/book/book.controller'
 import {
     createAuthor,
+    deleteAuthor,
     getAuthor,
     getAuthors,
+    updateAuthor,
 } from '../../modules/controllers/author/author.controller'
 import { ResolverContext } from '../../@types/ResolverContext'
 
@@ -27,6 +29,11 @@ const Mutation = {
         createBook(parent, args, context),
     createAuthor: (parent: unknown, args: unknown, context: ResolverContext) =>
         createAuthor(parent, args, context),
+    updateAuthor: (parent: unknown, args: unknown, context: ResolverContext) =>
+        updateAuthor(parent, args, context),
+    deleteAuthor: (parent: unknown, args: unknown, context: ResolverContext) =>
+        deleteAuthor(parent, args, context),
+        
 }
 
 export { Datetime, Query, Mutation }

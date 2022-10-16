@@ -47,4 +47,50 @@ const createAuthor = (
     }
 }
 
-export { getAuthors, getAuthor, createAuthor }
+const updateAuthor = (
+    parent: unknown,
+    args: unknown,
+    context: ResolverContext
+): Promise<Author> => {
+    try {
+        const { id } = args as { id: string }
+        const { author: authorInput } = args as { author: Author }
+        const { name, surname, birth } = authorInput as Author
+
+        if (!id) throw new Error('Author id is required')
+
+        const updatedAuthor = context.orm.author.update({
+            where: {
+                id,
+            },
+            data: {
+                name,
+                surname,
+                birth,
+            },
+        })
+        return updatedAuthor
+    } catch (error: any) {
+        throw new Error(error)
+    }
+}
+
+const deleteAuthor = (
+    parent: unknown,
+    args: unknown,
+    context: ResolverContext
+): Promise<Author> => {
+    try {
+        const { id } = args as { id: string }
+        const deletedAuthor = context.orm.author.delete({
+            where: {
+                id,
+            },
+        })
+        return deletedAuthor
+    } catch (error: any) {
+        throw new Error(error)
+    }
+}
+
+export { getAuthors, getAuthor, createAuthor, updateAuthor, deleteAuthor }
