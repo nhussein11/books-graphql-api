@@ -41,7 +41,8 @@ const createAuthor = (
         const { author: authorInput } = args as { author: Author }
         const { name, surname, birth } = authorInput as Author
 
-        if (!name || !surname || !birth) throw new Error('Author data is required')
+        if (!name || !surname || !birth)
+            throw new Error('Author data is required')
 
         const author = orm.author.create({
             data: {
@@ -68,6 +69,8 @@ const updateAuthor = (
         const { name, surname, birth } = authorInput as Author
 
         if (!id) throw new Error('Author id is required')
+        if (!name || !surname || !birth)
+            throw new Error('Author data is required')
 
         const updatedAuthor = context.orm.author.update({
             where: {
@@ -79,6 +82,7 @@ const updateAuthor = (
                 birth,
             },
         })
+
         return updatedAuthor
     } catch (error: any) {
         throw new Error(error)
@@ -92,11 +96,15 @@ const deleteAuthor = (
 ): Promise<Author> => {
     try {
         const { id } = args as { id: string }
+
+        if(!id) throw new Error('Author id is required')
+        
         const deletedAuthor = context.orm.author.delete({
             where: {
                 id,
             },
         })
+        
         return deletedAuthor
     } catch (error: any) {
         throw new Error(error)
