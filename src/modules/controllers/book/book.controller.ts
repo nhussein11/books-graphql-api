@@ -1,4 +1,4 @@
-import { Book } from '@prisma/client'
+import { Author, Book } from '@prisma/client'
 import { ResolverContext } from '../../../@types/ResolverContext'
 
 const getBooks = (
@@ -30,6 +30,16 @@ const getBook = (
     if (!book) throw new Error('Book not found')
     return book
 }
+
+const getBooksByAuthor = async (
+    parent: Author,
+    args: unknown,
+    context: ResolverContext
+): Promise<Book[] | undefined> => {
+    const books = await getBooks(parent, args, context)
+    return books.filter((book) => book.authorId === parent.id)
+}
+
 
 const createBook = (
     _parent: unknown,
@@ -115,4 +125,4 @@ const deleteBook = (
     }
 }
 
-export { getBooks, getBook, createBook, updateBook, deleteBook }
+export { getBooks, getBook, getBooksByAuthor,createBook, updateBook, deleteBook }
