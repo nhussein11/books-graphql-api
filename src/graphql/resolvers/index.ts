@@ -1,8 +1,10 @@
 import { Datetime } from '../../modules/base/scalar.model'
 import {
     createBook,
+    deleteBook,
     getBook,
     getBooks,
+    updateBook,
 } from '../../modules/controllers/book/book.controller'
 import {
     createAuthor,
@@ -27,6 +29,10 @@ const Query = {
 const Mutation = {
     createBook: (parent: unknown, args: unknown, context: ResolverContext) =>
         createBook(parent, args, context),
+    updateBook: (parent: unknown, args: unknown, context: ResolverContext) =>
+        updateBook(parent, args, context),
+    deleteBook: (parent: unknown, args: unknown, context: ResolverContext) =>
+        deleteBook(parent, args, context),
     createAuthor: (parent: unknown, args: unknown, context: ResolverContext) =>
         createAuthor(parent, args, context),
     updateAuthor: (parent: unknown, args: unknown, context: ResolverContext) =>

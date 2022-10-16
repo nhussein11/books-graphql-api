@@ -72,11 +72,14 @@ const getBook = (
 
 const createBook = (
     parent: unknown,
-    arg: unknown,
+    args: unknown,
     context: ResolverContext
 ): Promise<Book> => {
-    const { title, description, year, category, authorId } = arg as Book
-    const book = context.orm.book.create({
+    console.log(args)
+    const { book } = args as { book: Book }
+    const { title, description, year, category, authorId } = book
+
+    const newBook = context.orm.book.create({
         data: {
             title,
             description,
@@ -85,7 +88,7 @@ const createBook = (
             authorId,
         },
     })
-    return book
+    return newBook
 }
 
 const updateBook = (
@@ -97,7 +100,8 @@ const updateBook = (
         const { id } = arg as { id: string }
         if (!id) throw new Error('Book id is required')
 
-        const { title, description, year, category, authorId } = arg as Book
+        const { book } = arg as { book: Book }
+        const { title, description, year, category, authorId } = book
         const updatedBook = context.orm.book.update({
             where: {
                 id,
