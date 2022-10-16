@@ -6,7 +6,11 @@ const getAuthors = (
     args: unknown,
     context: ResolverContext
 ): Promise<Author[]> => {
-    return context.orm.author.findMany()
+    const { orm } = context
+    const authors = orm.author.findMany()
+
+    if (!authors) throw new Error('Authors not found')
+    return authors
 }
 
 const getAuthor = (
@@ -14,13 +18,16 @@ const getAuthor = (
     args: unknown,
     context: ResolverContext
 ): Promise<Author | null> => {
+    const { orm } = context
     const { id } = args as { id: string }
-    const author = context.orm.author.findUnique({
+
+    const author = orm.author.findUnique({
         where: {
             id,
         },
     })
 
+    if (!author) throw new Error('Author not found')
     return author
 }
 
@@ -30,9 +37,13 @@ const createAuthor = (
     context: ResolverContext
 ): Promise<Author> => {
     try {
+        const { orm } = context
         const { author: authorInput } = args as { author: Author }
         const { name, surname, birth } = authorInput as Author
-        const author = context.orm.author.create({
+
+        if (!name || !surname || !birth) throw new Error('Author data is required')
+
+        const author = orm.author.create({
             data: {
                 name,
                 surname,
@@ -42,7 +53,6 @@ const createAuthor = (
 
         return author
     } catch (error: any) {
-        console.log(error)
         throw new Error(error)
     }
 }
