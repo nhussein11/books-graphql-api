@@ -33,7 +33,6 @@ const Mutation = {
         updateAuthor(parent, args, context),
     deleteAuthor: (parent: unknown, args: unknown, context: ResolverContext) =>
         deleteAuthor(parent, args, context),
-        
 }
 
 export { Datetime, Query, Mutation }

@@ -88,16 +88,51 @@ const createBook = (
     return book
 }
 
-// export const resolver: Record<keyof Book, (parent: Book) => unknown> = {
-//   id: (parent) => parent.id,
-//   createdAt: (parent) => parent.createdAt,
-//   deletedAt: (parent) => parent.deletedAt,
-//   updatedAt: (parent) => parent.updatedAt,
-//   title: (parent) => parent.title,
-//   description: (parent) => parent.description,
-//   year: (parent) => parent.year,
-//   category: (parent) => parent.category,
-//   authorId: (parent) => parent.authorId,
-// };
+const updateBook = (
+    parent: unknown,
+    arg: unknown,
+    context: ResolverContext
+): Promise<Book> => {
+    try {
+        const { id } = arg as { id: string }
+        if (!id) throw new Error('Book id is required')
 
-export { getBooks, getBook, createBook }
+        const { title, description, year, category, authorId } = arg as Book
+        const updatedBook = context.orm.book.update({
+            where: {
+                id,
+            },
+            data: {
+                title,
+                description,
+                year,
+                category,
+                authorId,
+            },
+        })
+        return updatedBook
+    } catch (error: any) {
+        throw new Error(error)
+    }
+}
+
+const deleteBook = (
+    parent: unknown,
+    arg: unknown,
+    context: ResolverContext
+): Promise<Book> => {
+    try {
+        const { id } = arg as { id: string }
+        if (!id) throw new Error('Book id is required')
+        const deletedBook = context.orm.book.delete({
+            where: {
+                id,
+            },
+        })
+        return deletedBook
+    } catch (error: any) {
+        throw new Error(error)
+    }
+}
+
+export { getBooks, getBook, createBook, updateBook, deleteBook }
