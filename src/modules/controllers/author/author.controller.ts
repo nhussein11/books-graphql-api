@@ -104,7 +104,7 @@ const deleteAuthor = (
                 id,
             },
         })
-        
+
         return deletedAuthor
     } catch (error: any) {
         throw new Error(error)
