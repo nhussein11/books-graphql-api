@@ -53,9 +53,9 @@ const createBook = (
                 authorId,
             },
         })
-        
+
         return newBook
-    } catch (error) {
+    } catch (error: any) {
         throw new Error(error)
     }
 }
