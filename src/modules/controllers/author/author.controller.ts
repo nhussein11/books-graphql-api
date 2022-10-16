@@ -31,18 +31,18 @@ const createAuthor = (
 ): Promise<Author> => {
     try {
         const { author: authorInput } = args as { author: Author }
-        console.log(authorInput)
         const { name, surname, birth } = authorInput as Author
         const author = context.orm.author.create({
             data: {
                 name,
                 surname,
-                birth: new Date(birth),
+                birth,
             },
         })
 
         return author
     } catch (error: any) {
+        console.log(error)
         throw new Error(error)
     }
 }
