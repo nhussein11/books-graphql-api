@@ -2,8 +2,8 @@ import { Author, Book } from '@prisma/client'
 import { ResolverContext } from '../../../@types/ResolverContext'
 
 const getAuthors = (
-    parent: unknown,
-    args: unknown,
+    _parent: unknown,
+    _args: unknown,
     context: ResolverContext
 ): Promise<Author[]> => {
     const { orm } = context
@@ -14,7 +14,7 @@ const getAuthors = (
 }
 
 const getAuthor = (
-    parent: unknown,
+    _parent: unknown,
     args: unknown,
     context: ResolverContext
 ): Promise<Author | null> => {
@@ -41,7 +41,7 @@ const getAuthorByBook = async (
 }
 
 const createAuthor = (
-    parent: unknown,
+    _parent: unknown,
     args: unknown,
     context: ResolverContext
 ): Promise<Author> => {
@@ -68,7 +68,7 @@ const createAuthor = (
 }
 
 const updateAuthor = (
-    parent: unknown,
+    _parent: unknown,
     args: unknown,
     context: ResolverContext
 ): Promise<Author> => {
@@ -99,7 +99,7 @@ const updateAuthor = (
 }
 
 const deleteAuthor = (
-    parent: unknown,
+    _parent: unknown,
     args: unknown,
     context: ResolverContext
 ): Promise<Author> => {

@@ -2,8 +2,8 @@ import { Book } from '@prisma/client'
 import { ResolverContext } from '../../../@types/ResolverContext'
 
 const getBooks = (
-    parent: unknown,
-    args: unknown,
+    _parent: unknown,
+    _args: unknown,
     context: ResolverContext
 ): Promise<Book[]> => {
     const { orm } = context
@@ -14,7 +14,7 @@ const getBooks = (
 }
 
 const getBook = (
-    parent: unknown,
+    _parent: unknown,
     args: unknown,
     context: ResolverContext
 ): Promise<Book | null> => {
@@ -32,7 +32,7 @@ const getBook = (
 }
 
 const createBook = (
-    parent: unknown,
+    _parent: unknown,
     args: unknown,
     context: ResolverContext
 ): Promise<Book> => {
@@ -61,7 +61,7 @@ const createBook = (
 }
 
 const updateBook = (
-    parent: unknown,
+    _parent: unknown,
     arg: unknown,
     context: ResolverContext
 ): Promise<Book> => {
@@ -95,7 +95,7 @@ const updateBook = (
 }
 
 const deleteBook = (
-    parent: unknown,
+    _parent: unknown,
     arg: unknown,
     context: ResolverContext
 ): Promise<Book> => {
