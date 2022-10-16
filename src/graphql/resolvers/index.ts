@@ -45,7 +45,7 @@ const Mutation = {
 
 const Book = {
     author: (parent: Book, args: unknown, context: ResolverContext) =>
-        getAuthorByBook(parent, args, context),
+        getAuthorByBook(parent, args, context)
 }
 
 export { Datetime, Query, Mutation, Book }

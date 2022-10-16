@@ -33,9 +33,9 @@ const getAuthor = (
 
 const getAuthorByBook = async (
     parent: Book,
-    args: any,
+    args: unknown,
     context: ResolverContext
-) => {
+): Promise<Author | undefined> => {
     const authors = await getAuthors(parent, args, context)
     return authors.find((author) => author.id === parent.authorId)
 }
