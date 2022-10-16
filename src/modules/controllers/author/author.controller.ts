@@ -1,4 +1,4 @@
-import { Author } from '@prisma/client'
+import { Author, Book } from '@prisma/client'
 import { ResolverContext } from '../../../@types/ResolverContext'
 
 const getAuthors = (
@@ -29,6 +29,15 @@ const getAuthor = (
 
     if (!author) throw new Error('Author not found')
     return author
+}
+
+const getAuthorByBook = async (
+    parent: Book,
+    args: any,
+    context: ResolverContext
+) => {
+    const authors = await getAuthors(parent, args, context)
+    return authors.find((author) => author.id === parent.authorId)
 }
 
 const createAuthor = (
@@ -97,8 +106,8 @@ const deleteAuthor = (
     try {
         const { id } = args as { id: string }
 
-        if(!id) throw new Error('Author id is required')
-        
+        if (!id) throw new Error('Author id is required')
+
         const deletedAuthor = context.orm.author.delete({
             where: {
                 id,
@@ -111,4 +120,11 @@ const deleteAuthor = (
     }
 }
 
-export { getAuthors, getAuthor, createAuthor, updateAuthor, deleteAuthor }
+export {
+    getAuthors,
+    getAuthor,
+    getAuthorByBook,
+    createAuthor,
+    updateAuthor,
+    deleteAuthor,
+}

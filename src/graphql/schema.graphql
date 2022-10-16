@@ -32,7 +32,7 @@ type Book implements BaseModel {
     description: String
     year: Int
     category: Category
-    authorId: String
+    author: Author
 }
 
 type Author implements BaseModel {

@@ -10,10 +10,12 @@ import {
     createAuthor,
     deleteAuthor,
     getAuthor,
+    getAuthorByBook,
     getAuthors,
     updateAuthor,
 } from '../../modules/controllers/author/author.controller'
 import { ResolverContext } from '../../@types/ResolverContext'
+import { Book } from '@prisma/client'
 
 const Query = {
     getBooks: (parent: unknown, args: unknown, context: ResolverContext) =>
@@ -41,4 +43,9 @@ const Mutation = {
         deleteAuthor(parent, args, context),
 }
 
-export { Datetime, Query, Mutation }
+const Book = {
+    author: (parent: Book, args: unknown, context: ResolverContext) =>
+        getAuthorByBook(parent, args, context),
+}
+
+export { Datetime, Query, Mutation, Book }
