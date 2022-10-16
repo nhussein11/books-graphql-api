@@ -1,20 +1,29 @@
 {
-  "name": "graphql-apolloserver-prisma",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "dev": "nodemon src/server.ts"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@prisma/client": "^4.4.0",
-    "apollo-server": "^3.10.3",
-    "graphql": "^16.6.0",
-    "nodemon": "^2.0.20",
-    "prisma": "^4.4.0",
-    "ts-node": "^10.9.1"
-  }
+    "name": "graphql-apolloserver-prisma",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "dev": "nodemon src/server.ts",
+        "format:check": "prettier --check .",
+        "format:write": "prettier --write .",
+        "lint:check": "eslint .",
+        "lint:fix": "eslint --fix ."
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@prisma/client": "^4.4.0",
+        "apollo-server": "^3.10.3",
+        "graphql": "^16.6.0",
+        "nodemon": "^2.0.20",
+        "prisma": "^4.4.0",
+        "ts-node": "^10.9.1"
+    },
+    "devDependencies": {
+        "eslint": "^8.25.0",
+        "eslint-config-prettier": "^8.5.0",
+        "prettier": "^2.7.1"
+    }
 }

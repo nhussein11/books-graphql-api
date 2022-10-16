@@ -1,64 +1,63 @@
 scalar Datetime
 
 type Query {
-  getBooks: [Book]!
-  getBook(id: ID!): Book
-  getAuthors: [Author]!
-  getAuthor(id: ID!): Author
+    getBooks: [Book]!
+    getBook(id: ID!): Book
+    getAuthors: [Author]!
+    getAuthor(id: ID!): Author
 }
 type Mutation {
-  createBook(book: BookInput!): Book!
-  createAuthor(author: AuthorInput!): Author!
+    createBook(book: BookInput!): Book!
+    createAuthor(author: AuthorInput!): Author!
 }
 
 interface BaseModel {
-  id: ID!
-  createdAt: Datetime!
-  updatedAt: Datetime
-  deletedAt: Datetime
+    id: ID!
+    createdAt: Datetime!
+    updatedAt: Datetime
+    deletedAt: Datetime
 }
 
 type Book implements BaseModel {
-  id: ID!
-  createdAt: Datetime!
-  updatedAt: Datetime
-  deletedAt: Datetime
+    id: ID!
+    createdAt: Datetime!
+    updatedAt: Datetime
+    deletedAt: Datetime
 
-  title: String
-  description: String
-  year: Int
-  category: Category
+    title: String
+    description: String
+    year: Int
+    category: Category
 }
 
-
 type Author implements BaseModel {
-  id: ID!
-  createdAt: Datetime!
-  updatedAt: Datetime
-  deletedAt: Datetime
+    id: ID!
+    createdAt: Datetime!
+    updatedAt: Datetime
+    deletedAt: Datetime
 
-  name: String
-  surname: String
-  birthDate: Datetime
-  books: [Book]
+    name: String
+    surname: String
+    birthDate: Datetime
+    books: [Book]
 }
 
 enum Category {
-  ADVENTURE
-  HORROR
-  SCIENCE_FICTION
-  ROMANCE
+    ADVENTURE
+    HORROR
+    SCIENCE_FICTION
+    ROMANCE
 }
 
 input BookInput {
-  title: String!
-  description: String!
-  year: Int!
-  category: Category!
+    title: String!
+    description: String!
+    year: Int!
+    category: Category!
 }
 
 input AuthorInput {
-  name: String!
-  surname: String!
-  birthDate: Datetime!
+    name: String!
+    surname: String!
+    birthDate: Datetime!
 }

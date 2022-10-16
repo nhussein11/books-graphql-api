@@ -1,5 +1,5 @@
-import { Book } from "@prisma/client";
-import { ResolverContext } from "../../../@types/ResolverContext";
+import { Book } from '@prisma/client'
+import { ResolverContext } from '../../../@types/ResolverContext'
 
 // const books: Book[] = [
 //   {
@@ -49,44 +49,44 @@ import { ResolverContext } from "../../../@types/ResolverContext";
 // ];
 
 const getBooks = (
-  parent: unknown,
-  args: unknown,
-  context: ResolverContext
+    parent: unknown,
+    args: unknown,
+    context: ResolverContext
 ): Promise<Book[]> => {
-  return context.orm.book.findMany();
-};
+    return context.orm.book.findMany()
+}
 
 const getBook = (
-  parent: unknown,
-  args: unknown,
-  context: ResolverContext
+    parent: unknown,
+    args: unknown,
+    context: ResolverContext
 ): Promise<Book | null> => {
-  const { id } = args as { id: string };
-  const book = context.orm.book.findUnique({
-    where: {
-      id,
-    },
-  });
-  return book;
-};
+    const { id } = args as { id: string }
+    const book = context.orm.book.findUnique({
+        where: {
+            id,
+        },
+    })
+    return book
+}
 
 const createBook = (
-  parent: unknown,
-  arg: unknown,
-  context: ResolverContext
+    parent: unknown,
+    arg: unknown,
+    context: ResolverContext
 ): Promise<Book> => {
-  const { title, description, year, category, authorId } = arg as Book;
-  const book = context.orm.book.create({
-    data: {
-      title,
-      description,
-      year,
-      category,
-      authorId,
-    },
-  });
-  return book;
-};
+    const { title, description, year, category, authorId } = arg as Book
+    const book = context.orm.book.create({
+        data: {
+            title,
+            description,
+            year,
+            category,
+            authorId,
+        },
+    })
+    return book
+}
 
 // export const resolver: Record<keyof Book, (parent: Book) => unknown> = {
 //   id: (parent) => parent.id,
@@ -100,4 +100,4 @@ const createBook = (
 //   authorId: (parent) => parent.authorId,
 // };
 
-export { getBooks, getBook, createBook };
+export { getBooks, getBook, createBook }

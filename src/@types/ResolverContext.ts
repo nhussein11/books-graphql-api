@@ -1,5 +1,5 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client'
 
 export type ResolverContext = {
-  orm: PrismaClient;
-};
+    orm: PrismaClient
+}
