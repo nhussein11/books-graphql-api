@@ -42,17 +42,14 @@ const populateAuthorTable = async (orm: ResolverContext['orm']) => {
             name: 'Charles',
             surname: 'Dickens',
             birth: new Date('1812-02-07'),
-        }
+        },
     ]
     await orm.author.createMany({ data: authors })
 }
 
 const populateBookTable = async (orm: ResolverContext['orm']) => {
     const authors = await orm.author.findMany()
-    const books: Pick<
-        Book,
-        'title' | 'description' | 'year' | 'category' 
-    >[] = [
+    const books: Pick<Book, 'title' | 'description' | 'year' | 'category'>[] = [
         {
             title: 'The Fellowship of the Ring',
             description:

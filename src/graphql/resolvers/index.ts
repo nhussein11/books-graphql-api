@@ -46,12 +46,12 @@ const Mutation = {
 
 const Book = {
     author: (parent: Book, args: unknown, context: ResolverContext) =>
-        getAuthorByBook(parent, args, context)
+        getAuthorByBook(parent, args, context),
 }
 
 const Author = {
     books: (parent: Author, args: unknown, context: ResolverContext) =>
-        getBooksByAuthor(parent, args, context)
+        getBooksByAuthor(parent, args, context),
 }
 
 export { Datetime, Query, Mutation, Book, Author }
