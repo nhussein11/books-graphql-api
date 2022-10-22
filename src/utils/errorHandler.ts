@@ -15,6 +15,13 @@ const commonPrismaErrors = {
     P2006: 'The provided value for certain field is not valid',
     P2007: 'Data validation error ',
     P2008: 'Failed to parse the query',
+    P2009: 'Failed to validate the query',
+    P2010: 'Raw query failed',
+    P2011: 'Null constraint violation',
+    P2012: 'Missing a required value',
+    P2013: 'Missing a required argument',
+    P2014: 'The change you are trying to make would violate a required relation',
+    P2015: 'A related record could not be found',
 }
 
 const errorHandler = (
