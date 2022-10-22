@@ -32,20 +32,21 @@ const errorHandler = (
             name: error.name,
             message: error.message,
         }
-        return errorHandled
+        throw errorHandled
     }
+
     if (error instanceof PrismaClientKnownRequestError) {
         const errorHandled: errorHandled = {
             name: 'Something has gone wrong',
             message: commonPrismaErrors[error.code],
         }
-        return errorHandled
+        throw errorHandled
     }
 
-    const errorHandled: Omit<errorHandled, 'message'> = {
+    const errorHandled = {
         name: 'Something has gone wrong',
     }
-    return errorHandled
+    throw errorHandled
 }
 
-exports = { errorHandler }
+export { errorHandler }

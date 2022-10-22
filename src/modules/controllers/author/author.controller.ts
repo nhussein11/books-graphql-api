@@ -1,16 +1,21 @@
 import { Author, Book } from '@prisma/client'
 import { ResolverContext } from '../../../@types/ResolverContext'
+import { errorHandler } from '../../../utils/errorHandler'
 
 const getAuthors = (
     _parent: unknown,
     _args: unknown,
     context: ResolverContext
 ): Promise<Author[]> => {
-    const { orm } = context
-    const authors = orm.author.findMany()
+    try {
+        const { orm } = context
+        const authors = orm.author.findMany()
 
-    if (!authors) throw new Error('Authors not found')
-    return authors
+        if (!authors) throw new Error('Authors not found')
+        return authors
+    } catch (error) {
+        throw errorHandler(error)
+    }
 }
 
 const getAuthor = (
@@ -18,17 +23,21 @@ const getAuthor = (
     args: unknown,
     context: ResolverContext
 ): Promise<Author | null> => {
-    const { orm } = context
-    const { id } = args as { id: string }
+    try {
+        const { orm } = context
+        const { id } = args as { id: string }
 
-    const author = orm.author.findUnique({
-        where: {
-            id,
-        },
-    })
+        const author = orm.author.findUnique({
+            where: {
+                id,
+            },
+        })
 
-    if (!author) throw new Error('Author not found')
-    return author
+        if (!author) throw new Error('Author not found')
+        return author
+    } catch (error) {
+        throw errorHandler(error)
+    }
 }
 
 const getAuthorByBook = async (
@@ -36,8 +45,12 @@ const getAuthorByBook = async (
     args: unknown,
     context: ResolverContext
 ): Promise<Author | undefined> => {
-    const authors = await getAuthors(parent, args, context)
-    return authors.find((author) => author.id === parent.authorId)
+    try {
+        const authors = await getAuthors(parent, args, context)
+        return authors.find((author) => author.id === parent.authorId)
+    } catch (error) {
+        throw errorHandler(error)
+    }
 }
 
 const createAuthor = (
@@ -62,8 +75,8 @@ const createAuthor = (
         })
 
         return author
-    } catch (error: any) {
-        throw new Error(error)
+    } catch (error) {
+        throw errorHandler(error)
     }
 }
 
@@ -93,8 +106,8 @@ const updateAuthor = (
         })
 
         return updatedAuthor
-    } catch (error: any) {
-        throw new Error(error)
+    } catch (error) {
+        throw errorHandler(error)
     }
 }
 
@@ -115,8 +128,8 @@ const deleteAuthor = (
         })
 
         return deletedAuthor
-    } catch (error: any) {
-        throw new Error(error)
+    } catch (error) {
+        throw errorHandler(error)
     }
 }
 
