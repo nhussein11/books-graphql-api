@@ -1,16 +1,21 @@
 import { Author, Book } from '@prisma/client'
 import { ResolverContext } from '../../../@types/ResolverContext'
+import { errorHandler } from '../../../utils/errorHandler'
 
 const getBooks = (
     _parent: unknown,
     _args: unknown,
     context: ResolverContext
 ): Promise<Book[]> => {
-    const { orm } = context
-    const books = orm.book.findMany()
+    try {
+        const { orm } = context
+        const books = orm.book.findMany()
 
-    if (!books) throw new Error('Books not found')
-    return books
+        if (!books) throw new Error('Books not found')
+        return books
+    } catch (error) {
+        throw errorHandler(error)
+    }
 }
 
 const getBook = (
@@ -18,17 +23,21 @@ const getBook = (
     args: unknown,
     context: ResolverContext
 ): Promise<Book | null> => {
-    const { orm } = context
-    const { id } = args as { id: string }
+    try {
+        const { orm } = context
+        const { id } = args as { id: string }
 
-    const book = orm.book.findUnique({
-        where: {
-            id,
-        },
-    })
+        const book = orm.book.findUnique({
+            where: {
+                id,
+            },
+        })
 
-    if (!book) throw new Error('Book not found')
-    return book
+        if (!book) throw new Error('Book not found')
+        return book
+    } catch (error) {
+        throw errorHandler(error)
+    }
 }
 
 const getBooksByAuthor = async (
@@ -36,10 +45,13 @@ const getBooksByAuthor = async (
     args: unknown,
     context: ResolverContext
 ): Promise<Book[] | undefined> => {
-    const books = await getBooks(parent, args, context)
-    return books.filter((book) => book.authorId === parent.id)
+    try {
+        const books = await getBooks(parent, args, context)
+        return books.filter((book) => book.authorId === parent.id)
+    } catch (error) {
+        throw errorHandler(error)
+    }
 }
-
 
 const createBook = (
     _parent: unknown,
@@ -65,8 +77,8 @@ const createBook = (
         })
 
         return newBook
-    } catch (error: any) {
-        throw new Error(error)
+    } catch (error) {
+        throw errorHandler(error)
     }
 }
 
@@ -99,8 +111,8 @@ const updateBook = (
         })
 
         return updatedBook
-    } catch (error: any) {
-        throw new Error(error)
+    } catch (error) {
+        throw errorHandler(error)
     }
 }
 
@@ -120,9 +132,16 @@ const deleteBook = (
             },
         })
         return deletedBook
-    } catch (error: any) {
-        throw new Error(error)
+    } catch (error) {
+        throw errorHandler(error)
     }
 }
 
-export { getBooks, getBook, getBooksByAuthor,createBook, updateBook, deleteBook }
+export {
+    getBooks,
+    getBook,
+    getBooksByAuthor,
+    createBook,
+    updateBook,
+    deleteBook,
+}
