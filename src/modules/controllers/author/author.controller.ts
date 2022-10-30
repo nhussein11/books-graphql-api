@@ -11,8 +11,8 @@ const getAuthors = (
         const { orm } = context
         const { skip, take, where } = args as { skip: number, take: number, where: Prisma.AuthorWhereInput }
         const authors = orm.author.findMany({
-            skip,
-            take,
+            skip: skip || 0,
+            take: take || 10,
             where
         })
 
