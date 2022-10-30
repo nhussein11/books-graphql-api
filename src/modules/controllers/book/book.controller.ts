@@ -4,12 +4,16 @@ import { errorHandler } from '../../../utils/errorHandler'
 
 const getBooks = (
     _parent: unknown,
-    _args: unknown,
+    args: unknown,
     context: ResolverContext
 ): Promise<Book[]> => {
     try {
         const { orm } = context
-        const books = orm.book.findMany()
+        const { skip, take } = args as { skip: number, take: number }
+        const books = orm.book.findMany({
+            skip,
+            take,
+        })
 
         if (!books) throw new Error('Books not found')
         return books
