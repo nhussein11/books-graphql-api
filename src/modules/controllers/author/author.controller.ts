@@ -4,12 +4,16 @@ import { errorHandler } from '../../../utils/errorHandler'
 
 const getAuthors = (
     _parent: unknown,
-    _args: unknown,
+    args: unknown,
     context: ResolverContext
 ): Promise<Author[]> => {
     try {
         const { orm } = context
-        const authors = orm.author.findMany()
+        const { skip, take } = args as { skip: number, take: number }
+        const authors = orm.author.findMany({
+            skip,
+            take,
+        })
 
         if (!authors) throw new Error('Authors not found')
         return authors
