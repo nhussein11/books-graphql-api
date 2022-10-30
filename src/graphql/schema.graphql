@@ -1,9 +1,9 @@
 scalar Datetime
 
 type Query {
-    getBooks(pagination: PaginationInput): [Book]!
+    getBooks(filters: Filters, where: BooksWhereFilter): [Book]!
     getBook(id: ID!): Book
-    getAuthors(pagination: PaginationInput): [Author]!
+    getAuthors(filters: Filters, where: AuthorsWhereFilter): [Author]!
     getAuthor(id: ID!): Author
 }
 type Mutation {
@@ -67,7 +67,34 @@ input AuthorInput {
     surname: String!
     birth: Datetime!
 }
-input PaginationInput {
+input Filters {
     skip: Int
     take: Int
+}
+input BooksWhereFilter {
+    title: StringFilter
+    description: StringFilter
+    year: StringFilter
+    category: StringFilter
+    authorId: StringFilter
+}
+
+input AuthorsWhereFilter {
+    name: StringFilter
+    surname: StringFilter
+    birth: StringFilter
+}
+
+input StringFilter {
+    equals: String
+    in: [String]
+    notIn: [String]
+    contains: String
+    startsWith: String
+    endsWith: String
+    lt: String
+    lte: String
+    gt: String
+    gte: String
+    not: String
 }
