@@ -12,8 +12,8 @@ const getBooks = (
         const { skip, take, where } = args as { skip: number, take: number, where: Prisma.AuthorWhereInput }
         
         const books = orm.book.findMany({
-            skip,
-            take,
+            skip: skip || 0,
+            take: take || 10,
             where
         })
 
