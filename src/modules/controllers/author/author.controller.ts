@@ -1,4 +1,4 @@
-import { Author, Book } from '@prisma/client'
+import { Author, Book, Prisma } from '@prisma/client'
 import { ResolverContext } from '../../../@types/ResolverContext'
 import { errorHandler } from '../../../utils/errorHandler'
 
@@ -9,10 +9,11 @@ const getAuthors = (
 ): Promise<Author[]> => {
     try {
         const { orm } = context
-        const { skip, take } = args as { skip: number, take: number }
+        const { skip, take, where } = args as { skip: number, take: number, where: Prisma.AuthorWhereInput }
         const authors = orm.author.findMany({
             skip,
             take,
+            where
         })
 
         if (!authors) throw new Error('Authors not found')
