@@ -5,7 +5,6 @@ import { readFileSync } from 'fs'
 import path from 'path'
 import { PrismaClient } from '@prisma/client'
 
-console.log(path.dirname)
 const typeDefs = readFileSync(
     // eslint-disable-next-line no-undef
     path.join(__dirname, 'graphql', 'schema.graphql'),
