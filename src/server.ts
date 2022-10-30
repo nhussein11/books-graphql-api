@@ -1,9 +1,13 @@
-import { ApolloServer } from 'apollo-server'
+import { ApolloServer } from 'apollo-server-express'
 import * as resolvers from './graphql/resolvers'
 
 import { readFileSync } from 'fs'
 import path from 'path'
+import express from 'express'
+import http from 'http'
+
 import { PrismaClient } from '@prisma/client'
+import { ApolloServerPluginDrainHttpServer } from 'apollo-server-core'
 
 const typeDefs = readFileSync(
     // eslint-disable-next-line no-undef
@@ -12,14 +16,29 @@ const typeDefs = readFileSync(
 )
 const orm = new PrismaClient()
 
-const server = new ApolloServer({
-    typeDefs,
-    resolvers,
-    context: {
-        orm,
-    },
-})
+!(async function () {
+    console.log(path.join(__dirname, 'public'))
+    const app = express()
+    const httpServer = http.createServer(app)
 
-server.listen().then(({ url }) => {
-    console.log(`Server is running on ${url}`)
-})
+    app.use('/static', express.static(path.join(__dirname, 'public')))
+
+    const server = new ApolloServer({
+        typeDefs,
+        resolvers,
+        context: {
+            orm,
+        },
+        plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+    })
+
+    await server.start()
+    server.applyMiddleware({
+        app,
+        path: '/graphql',
+    })
+
+    await new Promise<void>((resolve) => httpServer.listen({ port: 4000 }, resolve))
+
+    console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
+})()
