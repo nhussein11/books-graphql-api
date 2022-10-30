@@ -99,6 +99,19 @@ const populateBookTable = async (orm: ResolverContext['orm']) => {
             year: 1998,
             category: 'FANTASY',
         },
+        {
+            title: 'Harry Potter and the Prisoner of Azkaban',
+            description: 'Harry Potter and the Prisoner of Azkaban is a fantasy novel written by British author J. K. Rowling and the third novel in the Harry Potter series. The book follows Harry Potter, a young wizard, in his third year at Hogwarts School of Witchcraft and Wizardry. Along with friends Ronald Weasley and Hermione Granger, Harry investigates Sirius Black, an escaped prisoner from Azkaban who they believe is one of Lord Voldemort\'s old allies.',
+            year: 1999,
+            category: 'FANTASY',
+        },
+        {
+            title: 'Harry Potter and the Goblet of Fire',
+            description:
+                'Harry Potter and the Goblet of Fire is a fantasy novel written by British author J. K. Rowling and the fourth novel in the Harry Potter series. It follows Harry Potter, a wizard in his fourth year at Hogwarts School of Witchcraft and Wizardry, and the mystery surrounding the entry of Harry\'s name into the Triwizard Tournament, in which he is forced to compete.',
+            year: 2000,
+            category: 'FANTASY',
+        }
     ]
 
     const booksWithAuthorId = authors.map((author, index) => ({
